@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ByteBasket Innovations | Digital Services Made to Order</title>
+<meta name="description" content="ByteBasket Innovations creates Canva templates, websites, logos, PowerPoint presentations and custom digital services, made to order.">
+<style>
+  :root {
+    --bg: #050b1e;
+    --bg2: #0a1530;
+    --panel: rgba(12, 22, 48, .72);
+    --line: rgba(34, 211, 238, .18);
+    --cyan: #22d3ee;
+    --blue: #3b82f6;
+    --teal: #2dd4bf;
+    --white: #eaf6ff;
+    --muted: #8ea4c7;
+    --grad: linear-gradient(120deg, #22d3ee, #3b82f6 55%, #2dd4bf);
+    --glow: 0 0 24px rgba(34,211,238,.35);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    color: var(--white);
+    background: var(--bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--cyan); color: var(--bg); }
+
+  /* ---------- Circuit background ---------- */
+  .circuit-bg {
+    position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(59,130,246,.22), transparent 55%),
+      radial-gradient(ellipse at 90% 100%, rgba(45,212,191,.14), transparent 55%),
+      var(--bg);
+  }
+  .grid-bg {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .35;
+    background-image:
+      linear-gradient(rgba(34,211,238,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,.08) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  }
+
+  /* ---------- Keyframes ---------- */
+  @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(6deg)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:none} }
+  @keyframes shine { 0%{left:-75%} 100%{left:125%} }
+  @keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.5)} 50%{box-shadow:0 0 0 14px rgba(34,211,238,0)} }
+  @keyframes bounceDown { 0%,100%{transform:translate(-50%,0)} 50%{transform:translate(-50%,8px)} }
+  @keyframes wave { 0%,60%,100%{transform:rotate(0)} 10%,30%{transform:rotate(14deg)} 20%{transform:rotate(-8deg)} 40%{transform:rotate(-4deg)} }
+  @keyframes scan { 0%{top:-10%} 100%{top:110%} }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes tickerMove { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes cubeSpin {
+    0%{transform:rotateX(-18deg) rotateY(0deg)} 100%{transform:rotateX(-18deg) rotateY(360deg)}
+  }
+  @keyframes orbitSpin {
+    0%{transform:rotateX(-12deg) rotateY(0deg)} 100%{transform:rotateX(-12deg) rotateY(-360deg)}
+  }
+  @keyframes ringPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+  @keyframes shadowPulse { 0%,100%{transform:scaleX(1);opacity:.9} 50%{transform:scaleX(.7);opacity:.5} }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(5, 11, 30, .7);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow .3s, background .3s;
+  }
+  header.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,.4); background: rgba(5,11,30,.92); }
+  .nav {
+    max-width: 1140px; margin: auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+  }
+  .logo { display: flex; align-items: center; text-decoration: none; }
+  .logo img { height: 46px; width: auto; display: block; filter: drop-shadow(0 0 10px rgba(34,211,238,.25)); }
+  .nav-links a {
+    position: relative; text-decoration: none; color: var(--muted); font-family: var(--mono);
+    font-size: .88rem; margin-left: 26px; transition: color .2s;
+  }
+  .nav-links a::before { content: "//"; color: var(--cyan); opacity: .6; margin-right: 4px; }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    color: var(--bg) !important; background: var(--grad); background-size: 200% 200%;
+    padding: 9px 18px; border-radius: 6px; font-weight: 700;
+    animation: gradientShift 5s ease infinite;
+    transition: transform .2s, box-shadow .2s !important;
+  }
+  .nav-cta::before { content: none !important; }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: var(--glow); color: var(--bg) !important; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden; text-align: center;
+    padding: 110px 20px 130px;
+  }
+  .hero::before {
+    content: ""; position: absolute; left: 0; right: 0; height: 120px; top: -120px; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(34,211,238,.12), transparent);
+    animation: scan 6s linear infinite;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; pointer-events: none; filter: blur(60px); opacity: .35;
+    animation: float 12s ease-in-out infinite;
+  }
+  .blob.b1 { width: 340px; height: 340px; top: -80px; left: -80px; background: #1d4ed8; }
+  .blob.b2 { width: 260px; height: 260px; bottom: 0; right: 4%; background: #0891b2; animation-duration: 15s; animation-delay: -3s; }
+
+  .hero-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 30px; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .hero-text { text-align: left; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 6px;
+    background: rgba(34,211,238,.08); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: .86rem; color: var(--cyan);
+    margin-bottom: 22px; animation: fadeUp .8s ease both;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: blink 1.4s infinite; }
+  .cycle { display: inline-block; min-width: 170px; color: var(--white); font-weight: 700; transition: opacity .35s, transform .35s; }
+  .cycle.out { opacity: 0; transform: translateY(-8px); }
+  .cursor-blink { display: inline-block; width: 8px; height: 1em; background: var(--cyan); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.12; letter-spacing: -.5px;
+    margin: 0 0 20px; animation: fadeUp .9s .15s ease both;
+  }
+  .accent {
+    background: var(--grad); background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradientShift 6s ease infinite;
+  }
+  .hero p {
+    font-size: 1.12rem; color: var(--muted); max-width: 560px; margin: 0 0 36px;
+    animation: fadeUp .9s .3s ease both;
+  }
+  .hero-buttons { animation: fadeUp .9s .45s ease both; }
+
+  .btn {
+    position: relative; overflow: hidden; display: inline-block;
+    padding: 14px 28px; border-radius: 6px; font-weight: 700; text-decoration: none; cursor: pointer;
+    font-size: .98rem; font-family: inherit; border: none;
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, background .25s;
+  }
+  .btn::before {
+    content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent); transform: skewX(-20deg);
+  }
+  .btn:hover::before { animation: shine .8s ease; }
+  .btn:hover { transform: translateY(-3px); }
+  .btn-primary { background: var(--grad); background-size: 200% 200%; color: var(--bg); animation: gradientShift 5s ease infinite; }
+  .btn-primary:hover { box-shadow: var(--glow), 0 12px 30px rgba(34,211,238,.25); }
+  .btn-outline { background: transparent; color: var(--cyan); border: 1.5px solid var(--cyan); margin-left: 12px; }
+  .btn-outline:hover { background: rgba(34,211,238,.1); box-shadow: var(--glow); }
+  .btn-dark { background: var(--cyan); color: var(--bg); }
+  .btn-dark:hover { box-shadow: var(--glow); }
+  .magnetic { transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s; }
+
+  /* ---------- 3D scene ---------- */
+  .scene3d { position: relative; width: 380px; height: 380px; margin: 0 auto; perspective: 1100px; justify-self: center; }
+  @media (max-width: 480px) { .scene3d { width: 300px; height: 300px; transform: scale(.85); } }
+  .cube {
+    position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px;
+    transform-style: preserve-3d; animation: cubeSpin 14s linear infinite;
+  }
+  .face {
+    position: absolute; inset: 0; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
+    background: linear-gradient(145deg, rgba(34,211,238,.28), rgba(59,130,246,.06));
+    border: 1.5px solid rgba(34,211,238,.6);
+    box-shadow: inset 0 0 26px rgba(34,211,238,.25), 0 0 26px rgba(34,211,238,.2);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .face.front  { transform: translateZ(75px); }
+  .face.back   { transform: rotateY(180deg) translateZ(75px); }
+  .face.right  { transform: rotateY(90deg) translateZ(75px); }
+  .face.left   { transform: rotateY(-90deg) translateZ(75px); }
+  .face.top    { transform: rotateX(90deg) translateZ(75px); background: linear-gradient(145deg, #2dd4bf, #0e7490); }
+  .face.bottom { transform: rotateX(-90deg) translateZ(75px); background: linear-gradient(145deg, #3b82f6, #1e3a8a); }
+  .orbit { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; animation: orbitSpin 18s linear infinite; }
+  .orbit-item {
+    position: absolute; left: 0; top: 0; width: 56px; height: 56px; margin: -28px 0 0 -28px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    border-radius: 12px; background: #0b1a3a; border: 1px solid var(--cyan);
+    box-shadow: var(--glow);
+    transform: rotateY(var(--a)) translateZ(190px);
+  }
+  .ring {
+    position: absolute; top: 50%; left: 50%; width: 380px; height: 380px; margin: -190px 0 0 -190px;
+    border-radius: 50%; border: 1.5px dashed rgba(34,211,238,.45); transform: rotateX(72deg);
+    animation: ringPulse 6s ease-in-out infinite;
+  }
+  .shadow3d {
+    position: absolute; left: 50%; bottom: 14px; width: 200px; height: 28px; margin-left: -100px;
+    background: radial-gradient(ellipse at center, rgba(34,211,238,.35), transparent 70%);
+    animation: shadowPulse 14s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .cube, .orbit { animation: none; } }
+
+  .scroll-hint {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 2;
+    width: 26px; height: 42px; border: 1.5px solid var(--cyan); border-radius: 14px; opacity: .8;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+  .scroll-hint::after {
+    content: ""; position: absolute; top: 8px; left: 50%; width: 3px; height: 8px; margin-left: -1.5px;
+    background: var(--cyan); border-radius: 2px;
+  }
+
+  /* ---------- Ticker ---------- */
+  .ticker {
+    overflow: hidden; background: var(--cyan); color: var(--bg); padding: 14px 0;
+    transform: rotate(-1.2deg); margin: 10px -20px 0; position: relative; z-index: 3;
+    box-shadow: 0 0 30px rgba(34,211,238,.3);
+  }
+  .ticker-track {
+    display: inline-flex; white-space: nowrap; gap: 26px; font-family: var(--mono); font-weight: 700; font-size: 1rem;
+    animation: tickerMove 26s linear infinite;
+  }
+  .ticker-track i { font-style: normal; color: var(--bg); opacity: .6; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 90px 20px; position: relative; }
+  .wrap { max-width: 1140px; margin: auto; }
+  .eyebrow {
+    display: block; text-align: center; font-family: var(--mono); font-weight: 700; font-size: .85rem;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: var(--cyan);
+  }
+  .eyebrow::before { content: "< "; } .eyebrow::after { content: " />"; }
+  .section-title { text-align: center; margin-bottom: 12px; font-size: clamp(1.9rem, 3.8vw, 2.6rem); font-weight: 800; letter-spacing: -.3px; }
+  .section-sub { text-align: center; color: var(--muted); max-width: 640px; margin: 0 auto 48px; }
+
+  /* ---------- Services ---------- */
+  .note {
+    max-width: 780px; margin: 0 auto 34px; text-align: center;
+    background: rgba(34,211,238,.06); border: 1px dashed rgba(34,211,238,.4); color: var(--white);
+    padding: 14px 20px; border-radius: 8px; font-size: .95rem;
+  }
+  .note strong { color: var(--cyan); }
+  .table-wrap {
+    overflow-x: auto; background: var(--panel); border-radius: 14px;
+    border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0,0,0,.4), inset 0 0 40px rgba(34,211,238,.03);
+    backdrop-filter: blur(8px);
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 680px; }
+  thead th {
+    background: rgba(34,211,238,.08); color: var(--cyan); text-align: left; padding: 18px 24px;
+    font-family: var(--mono); font-size: .8rem; letter-spacing: 1px; text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody tr { transition: background .3s, transform .3s; }
+  tbody td { padding: 20px 24px; border-bottom: 1px solid rgba(34,211,238,.08); vertical-align: middle; transition: padding .3s; color: var(--muted); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(34,211,238,.06); }
+  tbody tr:hover td:first-child { padding-left: 30px; }
+  tbody tr:hover td { box-shadow: inset 0 -1px 0 var(--cyan); }
+  .svc-name { font-weight: 700; color: var(--white); font-size: 1.05rem; }
+  .svc-icon {
+    display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center;
+    border-radius: 10px; margin-right: 12px; font-size: 1.3rem; vertical-align: middle;
+    background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.3);
+    transition: transform .4s cubic-bezier(.3,1.5,.5,1), box-shadow .3s;
+  }
+  tbody tr:hover .svc-icon { transform: rotate(-10deg) scale(1.12); box-shadow: var(--glow); }
+  tbody tr:hover .svc-icon.wave { animation: wave 1.2s ease; }
+  .tag {
+    display: inline-block; font-family: var(--mono); font-size: .76rem; padding: 4px 10px; border-radius: 4px;
+    background: rgba(45,212,191,.1); color: var(--teal); border: 1px solid rgba(45,212,191,.35);
+  }
+  .order-btn {
+    position: relative; overflow: hidden; display: inline-block;
+    background: transparent; color: var(--cyan); border: 1.5px solid var(--cyan);
+    padding: 10px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: .9rem; font-family: inherit;
+    transition: transform .25s, box-shadow .25s, background .25s, color .25s;
+  }
+  .order-btn::after {
+    content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-20deg);
+  }
+  .order-btn:hover::after { animation: shine .8s ease; }
+  .order-btn:hover { background: var(--cyan); color: var(--bg); transform: translateY(-2px); box-shadow: var(--glow); }
+
+  /* ---------- Service cards ---------- */
+  .svc-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+  }
+  .svc-card {
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 28px;
+    backdrop-filter: blur(10px);
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s, border-color .4s;
+  }
+  .svc-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--c);
+    box-shadow: 0 0 14px var(--c);
+  }
+  .svc-card::after {
+    content: ""; position: absolute; width: 220px; height: 220px; right: -90px; top: -90px; border-radius: 50%;
+    background: radial-gradient(circle, var(--cbg), transparent 70%); pointer-events: none;
+    transition: transform .6s ease;
+  }
+  .svc-card:hover {
+    transform: translateY(-10px); border-color: var(--c);
+    box-shadow: 0 24px 50px rgba(0,0,0,.4), 0 0 30px var(--cbg);
+  }
+  .svc-card:hover::after { transform: scale(1.4); }
+  .svc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; position: relative; z-index: 1; }
+  .svc-icon {
+    display: inline-flex; width: 60px; height: 60px; align-items: center; justify-content: center;
+    font-size: 1.7rem; border-radius: 14px; background: var(--cbg); border: 1px solid var(--c);
+    box-shadow: 0 0 18px var(--cbg);
+    transition: transform .5s cubic-bezier(.3,1.5,.5,1);
+  }
+  .svc-card:hover .svc-icon { transform: rotate(-12deg) scale(1.1); }
+  .svc-num { font-family: var(--mono); font-size: .9rem; color: var(--c); opacity: .8; }
+  .svc-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 1; }
+  .svc-desc { color: var(--muted); font-size: .95rem; margin-bottom: 26px; flex: 1; position: relative; z-index: 1; }
+  .svc-foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+  .svc-card .tag { color: var(--c); border-color: var(--c); background: var(--cbg); }
+  .svc-card .order-btn { color: var(--c); border-color: var(--c); }
+  .svc-card .order-btn:hover { background: var(--c); color: var(--bg); box-shadow: 0 0 22px var(--cbg); }
+
+  /* ---------- Timeline ---------- */
+  .timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .timeline::before {
+    content: ""; position: absolute; top: 28px; left: 12%; right: 12%; height: 2px;
+    background: var(--grad); background-size: 200% 100%; animation: gradientShift 5s linear infinite; opacity: .5;
+  }
+  .step {
+    position: relative; text-align: center; background: var(--panel); border-radius: 14px; padding: 26px 20px;
+    border: 1px solid var(--line); backdrop-filter: blur(8px);
+    transition: transform .35s, box-shadow .35s, border-color .35s;
+  }
+  .step:hover { transform: translateY(-8px); border-color: var(--cyan); box-shadow: var(--glow); }
+  .step-num {
+    width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; color: var(--bg); font-weight: 800; font-family: var(--mono);
+    background: var(--grad); background-size: 200% 200%; animation: gradientShift 6s ease infinite;
+    box-shadow: 0 0 0 4px var(--bg), 0 0 20px rgba(34,211,238,.4);
+  }
+  .step h4 { font-size: 1.1rem; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: .93rem; }
+  @media (max-width: 800px) { .timeline { grid-template-columns: 1fr 1fr; } .timeline::before { display: none; } }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } }
+
+  /* ---------- Why us ---------- */
+  .aurora { position: relative; overflow: hidden; }
+  .aurora-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .3; pointer-events: none; animation: float 14s ease-in-out infinite; }
+  .aurora-blob.a1 { width: 360px; height: 360px; background: #1d4ed8; top: -80px; left: -60px; }
+  .aurora-blob.a2 { width: 320px; height: 320px; background: #0d9488; bottom: -80px; right: -40px; animation-duration: 17s; animation-delay: -4s; }
+  .aurora > .wrap { position: relative; z-index: 1; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 60px; }
+  @media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--panel); border-radius: 14px; padding: 28px; text-align: center;
+    border: 1px solid var(--line); backdrop-filter: blur(8px); position: relative; overflow: hidden;
+    transition: transform .35s, box-shadow .35s, border-color .35s;
+  }
+  .feature::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad);
+  }
+  .feature:hover { border-color: var(--cyan); box-shadow: var(--glow); }
+  .feature .f-ico {
+    width: 60px; height: 60px; margin: 0 auto 16px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.35);
+  }
+  .feature h4 { font-size: 1.1rem; margin-bottom: 6px; }
+  .feature p { color: var(--muted); font-size: .95rem; }
+
+  /* ---------- Contact ---------- */
+  .contact-section { background: linear-gradient(180deg, transparent, rgba(34,211,238,.04)); overflow: hidden; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start; }
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+  .info-card, form.enquiry {
+    background: var(--panel); border-radius: 14px; padding: 32px;
+    border: 1px solid var(--line); backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  }
+  .info-card h3, form.enquiry h3 { margin-bottom: 20px; font-size: 1.35rem; }
+  .info-item {
+    display: flex; gap: 16px; align-items: center; margin-bottom: 18px; padding: 12px; border-radius: 10px;
+    border: 1px solid transparent; transition: background .3s, border-color .3s, transform .3s;
+  }
+  .info-item:hover { background: rgba(34,211,238,.06); border-color: var(--line); transform: translateX(6px); }
+  .info-item .ico {
+    width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.35);
+  }
+  .info-item small { color: var(--muted); display: block; font-family: var(--mono); font-size: .8rem; }
+  .info-item a { text-decoration: none; font-weight: 600; word-break: break-all; }
+  .info-item a:hover { color: var(--cyan); }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-weight: 600; margin-bottom: 6px; font-size: .9rem; color: var(--muted); transition: color .2s; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 13px 15px; border: 1px solid rgba(34,211,238,.2); border-radius: 8px;
+    font: inherit; background: rgba(5,11,30,.7); color: var(--white);
+    transition: border-color .25s, box-shadow .25s;
+  }
+  .field select option { background: var(--bg); }
+  .field input::placeholder, .field textarea::placeholder { color: #51657f; }
+  .field input:hover, .field select:hover, .field textarea:hover { border-color: rgba(34,211,238,.4); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34,211,238,.18); }
+  .field:focus-within label { color: var(--cyan); }
+  .field textarea { min-height: 120px; resize: vertical; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+  .submit { width: 100%; padding: 16px; font-size: 1.02rem; animation: pulseGlow 2.6s infinite; }
+  .submit:hover { animation: none; }
+
+  footer {
+    text-align: center; padding: 30px 20px; color: var(--muted); font-size: .9rem;
+    border-top: 1px solid var(--line); font-family: var(--mono);
+  }
+  .footer-brand { color: var(--cyan); font-weight: 700; }
+
+  .to-top {
+    position: fixed; right: 22px; bottom: 22px; width: 48px; height: 48px; border-radius: 10px;
+    background: var(--cyan); color: var(--bg); border: none; cursor: pointer; font-size: 1.2rem; font-weight: 700;
+    box-shadow: var(--glow); opacity: 0; transform: translateY(20px); pointer-events: none;
+    transition: opacity .3s, transform .3s; z-index: 60;
+  }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { transform: translateY(-4px); }
+
+  .progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 100;
+    background: var(--grad); background-size: 200% 100%; animation: gradientShift 4s linear infinite;
+    box-shadow: 0 0 10px var(--cyan);
+  }
+  .cursor-glow {
+    position: fixed; width: 340px; height: 340px; border-radius: 50%; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle, rgba(34,211,238,.1), transparent 70%);
+    transform: translate(-50%, -50%); transition: opacity .3s; top: 0; left: 0; opacity: 0;
+  }
+  @media (hover: none) { .cursor-glow { display: none; } }
+
+  /* Reveal on scroll */
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-text { text-align: center; }
+    .hero-badge { margin-left: auto; margin-right: auto; }
+    .hero-buttons .btn-outline { margin: 12px 0 0 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important; scroll-behavior: auto !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="circuit-bg"></div>
+<div class="grid-bg"></div>
+<div class="progress" id="progress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<header id="header">
+  <nav class="nav">
+    <a href="#top" class="logo" aria-label="ByteBasket Innovations home">
+      <img src="assets/logo.png" alt="ByteBasket Innovations logo">
+    </a>
+    <div class="nav-links">
+      <a href="#services">services</a>
+      <a href="#process">process</a>
+      <a href="#why">why us</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero" style="padding:110px 20px 130px;">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-badge"><span class="dot"></span> Now crafting: <span class="cycle" id="cycle">Canva Templates</span></span>
+        <h1>Creative Digital Services, <span class="accent">Engineered for You</span></h1>
+        <p>Canva templates, websites, logos, PowerPoint presentations and custom digital solutions, built to order with precision and style.</p>
+        <div class="hero-buttons">
+          <a href="#services" class="btn btn-primary magnetic">View Services</a>
+          <a href="#contact" class="btn btn-outline magnetic">Place an Order</a>
+        </div>
+      </div>
+
+      <div class="scene3d" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="orbit">
+          <div class="orbit-item" style="--a:0deg"><span>🎨</span></div>
+          <div class="orbit-item" style="--a:72deg"><span>🌐</span></div>
+          <div class="orbit-item" style="--a:144deg"><span>✨</span></div>
+          <div class="orbit-item" style="--a:216deg"><span>📊</span></div>
+          <div class="orbit-item" style="--a:288deg"><span>🧩</span></div>
+        </div>
+        <div class="cube">
+          <div class="face front">⚡</div>
+          <div class="face back">🎨</div>
+          <div class="face right">🌐</div>
+          <div class="face left">📊</div>
+          <div class="face top">✨</div>
+          <div class="face bottom">🧩</div>
+        </div>
+        <div class="shadow3d"></div>
+      </div>
+    </div>
+    <div class="scroll-hint"></div>
+  </section>
+
+  <!-- Ticker -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>CANVA TEMPLATES</span><i>///</i><span>WEBSITES</span><i>///</i><span>LOGOS</span><i>///</i><span>POWERPOINT PRESENTATIONS</span><i>///</i><span>CUSTOM DIGITAL WORK</span><i>///</i>
+      <span>CANVA TEMPLATES</span><i>///</i><span>WEBSITES</span><i>///</i><span>LOGOS</span><i>///</i><span>POWERPOINT PRESENTATIONS</span><i>///</i><span>CUSTOM DIGITAL WORK</span><i>///</i>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section id="services" style="padding-top:110px;">
+    <div class="wrap">
+      <span class="eyebrow reveal">What We Do</span>
+      <h2 class="section-title reveal">Our Services</h2>
+      <p class="section-sub reveal">Every service is created to order, tailored to your brand and your needs.</p>
+
+      <div class="note reveal">All our digital work is made to order. Click <strong>Order Now</strong> to tell us what you need, and we'll get back to you with a quote.</div>
+
+      <div class="svc-grid">
+        <article class="svc-card reveal reveal-delay-0" style="--c:#22d3ee;--cbg:rgba(34,211,238,.14);">
+          <div class="svc-top">
+            <span class="svc-icon">🎨</span>
+            <span class="svc-num">01</span>
+          </div>
+          <h3 class="svc-title">Canva Templates</h3>
+          <p class="svc-desc">Custom, editable Canva designs for social media posts, reels, flyers and more.</p>
+          <div class="svc-foot">
+            <span class="tag">QUOTED PER PROJECT</span>
+            <a class="order-btn" href="#contact" data-service="Canva Templates">Order Now</a>
+          </div>
+        </article>
+        <article class="svc-card reveal reveal-delay-1" style="--c:#3b82f6;--cbg:rgba(59,130,246,.14);">
+          <div class="svc-top">
+            <span class="svc-icon">🌐</span>
+            <span class="svc-num">02</span>
+          </div>
+          <h3 class="svc-title">Websites</h3>
+          <p class="svc-desc">Clean, responsive websites for businesses, portfolios and landing pages.</p>
+          <div class="svc-foot">
+            <span class="tag">QUOTED PER PROJECT</span>
+            <a class="order-btn" href="#contact" data-service="Websites">Order Now</a>
+          </div>
+        </article>
+        <article class="svc-card reveal reveal-delay-2" style="--c:#a78bfa;--cbg:rgba(167,139,250,.14);">
+          <div class="svc-top">
+            <span class="svc-icon">✨</span>
+            <span class="svc-num">03</span>
+          </div>
+          <h3 class="svc-title">Logos</h3>
+          <p class="svc-desc">Unique logo design with brand-ready files for print and web.</p>
+          <div class="svc-foot">
+            <span class="tag">QUOTED PER PROJECT</span>
+            <a class="order-btn" href="#contact" data-service="Logos">Order Now</a>
+          </div>
+        </article>
+        <article class="svc-card reveal reveal-delay-3" style="--c:#2dd4bf;--cbg:rgba(45,212,191,.14);">
+          <div class="svc-top">
+            <span class="svc-icon">📊</span>
+            <span class="svc-num">04</span>
+          </div>
+          <h3 class="svc-title">PowerPoint Presentations</h3>
+          <p class="svc-desc">Professional, eye-catching slide decks for business, school and pitches.</p>
+          <div class="svc-foot">
+            <span class="tag">QUOTED PER PROJECT</span>
+            <a class="order-btn" href="#contact" data-service="PowerPoint Presentations">Order Now</a>
+          </div>
+        </article>
+        <article class="svc-card reveal reveal-delay-0" style="--c:#f472b6;--cbg:rgba(244,114,182,.14);">
+          <div class="svc-top">
+            <span class="svc-icon">🧩</span>
+            <span class="svc-num">05</span>
+          </div>
+          <h3 class="svc-title">Other Custom Services</h3>
+          <p class="svc-desc">Something specific in mind? Tell us and we'll build it for you.</p>
+          <div class="svc-foot">
+            <span class="tag">QUOTED PER PROJECT</span>
+            <a class="order-btn" href="#contact" data-service="Other Custom Service">Order Now</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="process" style="padding-top:30px;">
+    <div class="wrap">
+      <span class="eyebrow reveal">How It Works</span>
+      <h2 class="section-title reveal">From Idea to Delivery</h2>
+      <p class="section-sub reveal">A simple four-step process, made to order for every client.</p>
+      <div class="timeline">
+        <div class="step reveal"><div class="step-num">01</div><h4>Tell Us</h4><p>Send your order with the service, details and deadline.</p></div>
+        <div class="step reveal reveal-delay-1"><div class="step-num">02</div><h4>Get a Quote</h4><p>We reply with a clear price and timeline for your project.</p></div>
+        <div class="step reveal reveal-delay-2"><div class="step-num">03</div><h4>We Create</h4><p>Your work is designed and shared for review along the way.</p></div>
+        <div class="step reveal reveal-delay-3"><div class="step-num">04</div><h4>Delivered</h4><p>Receive your final files, ready to use and easy to edit.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why" class="aurora" style="padding-top:20px;">
+    <div class="aurora-blob a1"></div><div class="aurora-blob a2"></div>
+    <div class="wrap">
+      <span class="eyebrow reveal">Why ByteBasket</span>
+      <h2 class="section-title reveal">Built Different</h2>
+      <p class="section-sub reveal">Quality work, a personal touch, and fast communication from start to finish.</p>
+      <div class="features">
+        <div class="feature reveal">
+          <div class="f-ico">🎯</div>
+          <h4>Tailored to You</h4>
+          <p>Every project is made around your brand, your audience and your goals.</p>
+        </div>
+        <div class="feature reveal reveal-delay-1">
+          <div class="f-ico">⚡</div>
+          <h4>Fast Turnaround</h4>
+          <p>Clear timelines and quick revisions so your project never stalls.</p>
+        </div>
+        <div class="feature reveal reveal-delay-2">
+          <div class="f-ico">🤝</div>
+          <h4>Personal Support</h4>
+          <p>Reach us directly by email or phone, and we'll guide you at every step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Order -->
+  <section id="contact" class="contact-section">
+    <div class="wrap">
+      <span class="eyebrow reveal">Let's Talk</span>
+      <h2 class="section-title reveal">Contact &amp; Order</h2>
+      <p class="section-sub reveal">Fill in the form below and we'll email you back with a quote. You can also reach us directly.</p>
+
+      <div class="contact-grid">
+        <div class="info-card reveal">
+          <h3>Get in Touch</h3>
+          <div class="info-item">
+            <div class="ico">✉️</div>
+            <div>
+              <small>EMAIL</small>
+              <a href="mailto:bytebasketinnovations@gmail.com">bytebasketinnovations@gmail.com</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="ico">📞</div>
+            <div>
+              <small>PHONE</small>
+              <a href="tel:+917876309528">+91 78763 09528</a>
+            </div>
+          </div>
+        </div>
+
+        <form class="enquiry reveal reveal-delay-1"
+              action="https://formsubmit.co/bytebasketinnovations@gmail.com"
+              method="POST">
+          <h3>Place an Order</h3>
+          <input type="hidden" name="_subject" value="New Order Enquiry - ByteBasket Innovations">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="row">
+            <div class="field">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com">
+          </div>
+
+          <div class="field">
+            <label for="service">Service Required *</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>Canva Templates</option>
+              <option>Websites</option>
+              <option>Logos</option>
+              <option>PowerPoint Presentations</option>
+              <option>Other Custom Service</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="details">Project Details *</label>
+            <textarea id="details" name="details" required placeholder="Tell us what you need, your deadline, and any references or preferences"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-dark submit">Send Order Enquiry →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="footer-brand">BYTEBASKET INNOVATIONS</span> &copy; 2026 · ALL SERVICES ARE MADE TO ORDER
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // Header, progress bar, back-to-top
+  var header = document.getElementById('header');
+  var progress = document.getElementById('progress');
+  var toTop = document.getElementById('toTop');
+  function onScroll() {
+    var y = window.scrollY;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    header.classList.toggle('scrolled', y > 20);
+    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    toTop.classList.toggle('show', y > 500);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Cursor glow
+  var glow = document.getElementById('cursorGlow');
+  window.addEventListener('mousemove', function (e) {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    glow.style.opacity = 1;
+  });
+  document.addEventListener('mouseleave', function () { glow.style.opacity = 0; });
+
+  // Rotating badge text
+  (function () {
+    var words = ['Canva Templates', 'Websites', 'Logos', 'PowerPoint Presentations', 'Custom Projects'];
+    var el = document.getElementById('cycle');
+    if (!el) return;
+    var i = 0;
+    setInterval(function () {
+      el.classList.add('out');
+      setTimeout(function () {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('out');
+      }, 350);
+    }, 2600);
+  })();
+
+  // Magnetic buttons
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.magnetic').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.35) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  // Pre-select service when "Order Now" is clicked
+  document.querySelectorAll('[data-service]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var select = document.getElementById('service');
+      var value = btn.getAttribute('data-service');
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].text === value) { select.selectedIndex = i; break; }
+      }
+    });
+  });
+</script>
+</body>
+</html>
